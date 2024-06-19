@@ -97,12 +97,3 @@ jobs:
           context: frontend
           push: true
           tags: ${{ secrets.ECR_REPOSITORY }}:latest
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
