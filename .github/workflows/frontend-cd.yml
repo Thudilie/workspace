@@ -1,4 +1,4 @@
-name: cd-frontend
+name: frontend-cd
 
 on:
   push:
@@ -47,7 +47,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_FRONTEND }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -55,8 +55,8 @@ jobs:
           context: frontend
           push: true
           tags: |
-            ${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
-            ${{ secrets.ECR_REPOSITORY }}:latest
+            ${{ secrets.ECR_REPOSITORY_FRONTEND }}:${{ github.sha }}
+            ${{ secrets.ECR_REPOSITORY_FRONTEND }}:latest
 
   deploy:
     needs: [build]
