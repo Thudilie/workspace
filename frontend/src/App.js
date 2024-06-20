@@ -11,7 +11,7 @@ export default function App() {
   };
 
   return (
-    <div className="container">
+    <div className="container test">
       <h1>Movie List</h1>
 
       <MovieList onMovieClick={handleMovieClick} />
